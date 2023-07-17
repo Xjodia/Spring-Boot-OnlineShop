@@ -1,8 +1,9 @@
 package com.example.springbootonlineshop.mapper;
 
-import com.example.springbootonlineshop.dto.AccountDTOCreate;
-import com.example.springbootonlineshop.dto.AccountDTOResponse;
+import com.example.springbootonlineshop.dto.account.AccountDTOCreate;
+import com.example.springbootonlineshop.dto.account.AccountDTOResponse;
 import com.example.springbootonlineshop.entity.Account;
+import com.example.springbootonlineshop.model.TokenPayload;
 
 public class AccountMapper {
     public static Account toAccount(AccountDTOCreate accountDTOCreate) {
@@ -21,4 +22,10 @@ public class AccountMapper {
                 .build();
     }
 
+    public static TokenPayload toTokenPayload(Account account) {
+        return TokenPayload.builder()
+                .accountId(account.getId())
+                .username(account.getUsername())
+                .build();
+    }
 }

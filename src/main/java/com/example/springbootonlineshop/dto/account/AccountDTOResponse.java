@@ -1,4 +1,4 @@
-package com.example.springbootonlineshop.dto;
+package com.example.springbootonlineshop.dto.account;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -9,9 +9,8 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AccountDTOCreate {
+public class AccountDTOResponse {
     int id;
     String username;
     String email;
-    String password;
 }
