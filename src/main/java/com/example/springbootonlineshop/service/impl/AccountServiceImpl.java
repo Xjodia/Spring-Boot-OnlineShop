@@ -21,9 +21,7 @@ import org.springframework.stereotype.Service;
 public class AccountServiceImpl implements AccountService {
 
     AccountRepository accountRepository;
-
     PasswordEncoder passwordEncoder;
-
     JwtTokenUtil jwtTokenUtil;
 
     @Override

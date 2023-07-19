@@ -37,10 +37,11 @@ public class JwtTokenUtil {
                     .build();
         });
     }
-    public <T> T getClaimsFromToken(String token, Function<Claims, T> claimResolver){
+
+    public <T> T getClaimsFromToken(String token, Function<Claims, T> claimResolver) {
         final Claims claims = Jwts.parser()
                 .setSigningKey(SECRET_SIGNATURE)
-                .parseClaimsJwt(token).getBody();
+                .parseClaimsJws(token).getBody();
         return claimResolver.apply(claims);
     }
 
@@ -51,6 +52,7 @@ public class JwtTokenUtil {
                 && tokenPayload.getUsername().equals(tokenPayloadFromAccount.getUsername()) ;
     }
 
+    //Check if the token has expired
     private boolean isTokenExpired(String token){
         Date expiredTime = getClaimsFromToken(token, Claims::getExpiration);
         return expiredTime.before(new Date());

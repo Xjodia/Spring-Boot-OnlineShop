@@ -2,27 +2,21 @@ package com.example.springbootonlineshop.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tbl_account")
+@Table(name = "tbl_category")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Account {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-
-    @Column(unique = true, nullable = false)
-    String username;
-
-    @Column(unique = true, nullable = false)
-    String email;
-
     @Column(nullable = false)
-    String password;
+    String categoryName;
 }
