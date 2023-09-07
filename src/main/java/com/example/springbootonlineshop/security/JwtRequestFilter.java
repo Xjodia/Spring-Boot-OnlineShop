@@ -42,16 +42,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         TokenPayload tokenPayload = null;
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             token = requestTokenHeader.split(" ")[1];
+            System.out.println(token);
             try {
                 tokenPayload = jwtTokenUtil.getTokenPayload(token);
             } catch (ExpiredJwtException ex) {
                 System.out.println("Token is expired");
             }
-
         } else {
             System.out.println("JWT not start with Bearer");
         }
-
         if (tokenPayload != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             Optional<Account> accountOptional = accountRepository.findById(tokenPayload.getAccountId());
             if (accountOptional.isPresent()) {
@@ -62,11 +61,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     UserDetails userDetails = new User(account.getUsername(), account.getPassword(), authorities);
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                             new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
-                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);// đánh dấu người dùng đã đăng nhập
+                    // đánh dấu người dùng đã đăng nhập
+                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 }
             }
         }
         filterChain.doFilter(request, response);
-
     }
 }

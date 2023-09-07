@@ -6,10 +6,9 @@ import com.example.springbootonlineshop.service.CategoryService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.example.springbootonlineshop.utils.Constant.API_VERSION;
 
@@ -23,5 +22,15 @@ public class CategoryController {
     @PostMapping()
     public CategoryDTOResponse createCategory(@RequestBody CategoryDTOCreate categoryDTOCreate){
         return categoryService.createCategory(categoryDTOCreate);
+    }
+
+    @GetMapping()
+    public List<CategoryDTOResponse> getAllCategory(){
+        return categoryService.getAllCategory();
+    }
+
+    @GetMapping("/{id}")
+    public CategoryDTOResponse getCategoryById(@PathVariable(name = "id") int cateId){
+        return categoryService.getCategoryById(cateId);
     }
 }
